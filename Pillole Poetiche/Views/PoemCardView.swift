@@ -7,6 +7,9 @@ struct PoemCardView: View {
     @State private var showCopyConfirmation = false
     @State private var showFullPoem = false
     
+    // CORREZIONE: Altezza fissa per le card del carousel
+    private let fixedCardHeight: CGFloat = 280
+    
     init(poem: Poem, horizontalPadding: CGFloat = 16, isHorizontalScroll: Bool = false) {
         self.poem = poem
         self.horizontalPadding = horizontalPadding
@@ -22,23 +25,34 @@ struct PoemCardView: View {
                     .fontWeight(.semibold)
                     .foregroundStyle(.primary)
                     .multilineTextAlignment(.leading)
+                    .lineLimit(isHorizontalScroll ? 2 : nil) // Limita il titolo nel carousel
             }
             
-            // Testo della poesia con truncation manuale per carousel
+            // CORREZIONE: Testo della poesia con gestione intelligente dello spazio
             if isHorizontalScroll {
-                Text(truncatedText)
-                    .font(.body)
-                    .foregroundStyle(.secondary)
-                    .multilineTextAlignment(.leading)
-                    .lineSpacing(6)
-                    .fixedSize(horizontal: false, vertical: true)
+                // Nel carousel, usiamo uno ScrollView interno per testi molto lunghi
+                ScrollView {
+                    Text(poem.poem)
+                        .font(.body)
+                        .foregroundStyle(.secondary)
+                        .multilineTextAlignment(.leading)
+                        .lineSpacing(6)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+                .frame(maxHeight: calculateTextHeight()) // Altezza dinamica basata sul contenuto disponibile
             } else {
+                // Card normale senza limitazioni
                 Text(poem.poem)
                     .font(.body)
                     .foregroundStyle(.secondary)
                     .multilineTextAlignment(.leading)
                     .lineSpacing(6)
                     .fixedSize(horizontal: false, vertical: true)
+            }
+            
+            // CORREZIONE: Spacer per spingere l'autore e i pulsanti in basso nelle card del carousel
+            if isHorizontalScroll {
+                Spacer()
             }
             
             // Autore e pulsanti
@@ -48,12 +62,13 @@ struct PoemCardView: View {
                     .foregroundStyle(.tertiary)
                     .fontWeight(.medium)
                     .italic()
+                    .lineLimit(1) // Evita che l'autore vada su più righe
                 
                 Spacer()
                 
                 HStack(spacing: 12) {
-                    // Pulsante "Leggi tutto" solo nel carousel se il testo è troncato
-                    if isHorizontalScroll && poem.poem.count > 110 {
+                    // Pulsante "Leggi tutto" sempre presente nel carousel
+                    if isHorizontalScroll {
                         Button(action: { showFullPoem = true }) {
                             Label("Espandi", systemImage: "arrow.up.left.and.arrow.down.right")
                                 .labelStyle(.iconOnly)
@@ -76,11 +91,13 @@ struct PoemCardView: View {
             }
         }
         .padding(20)
+        .frame(height: isHorizontalScroll ? fixedCardHeight : nil) // CORREZIONE: Altezza fissa solo per il carousel
+        .frame(maxWidth: .infinity, alignment: .topLeading) // Allineamento in alto a sinistra
         .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 16))
         .padding(.horizontal, horizontalPadding)
         .contentShape(Rectangle())
         .onTapGesture {
-            if isHorizontalScroll && poem.poem.count > 110 {
+            if isHorizontalScroll {
                 showFullPoem = true
             }
         }
@@ -90,14 +107,14 @@ struct PoemCardView: View {
         }
     }
     
-    // Computed property per il testo troncato
-    private var truncatedText: String {
-        if poem.poem.count <= 110 {
-            return poem.poem
-        } else {
-            let truncated = String(poem.poem.prefix(110))
-            return truncated + "..."
-        }
+    // CORREZIONE: Calcola l'altezza massima disponibile per il testo nel carousel
+    private func calculateTextHeight() -> CGFloat {
+        let titleHeight: CGFloat = poem.title.isEmpty ? 0 : 50 // Stima altezza titolo
+        let authorHeight: CGFloat = 40 // Stima altezza sezione autore/pulsanti
+        let padding: CGFloat = 56 // Padding totale (20 * 2 + spacing)
+        let spacing: CGFloat = 32 // Spacing tra elementi (16 * 2)
+        
+        return fixedCardHeight - titleHeight - authorHeight - padding - spacing
     }
     
     private func copyPoem() {
@@ -225,7 +242,7 @@ struct FullPoemView: View {
         PoemCardView(
             poem: Poem(
                 title: "Test Poesia",
-                poem: "Questa è una poesia di test per vedere come viene visualizzata nella card.",
+                poem: "Questa è una poesia di test per vedere come viene visualizzata nella card normale senza limitazioni di altezza.",
                 author: "Autore Test"
             ),
             horizontalPadding: 16,
@@ -236,31 +253,47 @@ struct FullPoemView: View {
     .background(Color(UIColor.systemBackground))
 }
 
-#Preview("Card Carousel - Testo Troncato") {
-    VStack(spacing: 20) {
-        // Poesia corta (non troncata)
-        PoemCardView(
-            poem: Poem(
-                title: "Breve",
-                poem: "Testo breve che non viene troncato perché ha meno di 110 caratteri.",
-                author: "Autore"
-            ),
-            horizontalPadding: 16,
-            isHorizontalScroll: true
-        )
-        
-        // Poesia lunga (troncata)
-        PoemCardView(
-            poem: Poem(
-                title: "Lunga",
-                poem: "Questo è un testo molto lungo che supera i 110 caratteri e dovrebbe essere troncato esattamente al centodecimo carattere con tre puntini per indicare che c'è altro testo da leggere. Questo testo è abbastanza lungo da testare la funzionalità.",
-                author: "Autore Test"
-            ),
-            horizontalPadding: 16,
-            isHorizontalScroll: true
-        )
+#Preview("Card Carousel - Altezza Fissa") {
+    ScrollView(.horizontal, showsIndicators: false) {
+        LazyHStack(spacing: 16) {
+            // Poesia corta
+            PoemCardView(
+                poem: Poem(
+                    title: "Breve",
+                    poem: "Testo breve che viene visualizzato in una card di altezza fissa.",
+                    author: "Autore"
+                ),
+                horizontalPadding: 0,
+                isHorizontalScroll: true
+            )
+            .frame(width: 300)
+            
+            // Poesia media
+            PoemCardView(
+                poem: Poem(
+                    title: "Media",
+                    poem: "Questo è un testo di media lunghezza che dovrebbe adattarsi bene alla card di altezza fissa senza creare problemi di sovrapposizione con altri elementi dell'interfaccia.",
+                    author: "Autore Test"
+                ),
+                horizontalPadding: 0,
+                isHorizontalScroll: true
+            )
+            .frame(width: 300)
+            
+            // Poesia lunga
+            PoemCardView(
+                poem: Poem(
+                    title: "Lunga con titolo molto lungo che potrebbe andare su più righe",
+                    poem: "Questo è un testo molto lungo che prima causava problemi di sovrapposizione. Ora con l'altezza fissa e lo ScrollView interno, il testo si adatta perfettamente senza interferire con altri elementi. L'utente può scorrere per leggere tutto il contenuto all'interno della card oppure toccare per aprire la vista completa. Questo approccio risolve il problema delle card che si compenetravano con la scritta 'Scorri poesie' e mantiene un layout pulito e consistente. Il testo continua qui per testare come si comporta lo scroll interno quando abbiamo davvero molto contenuto da visualizzare. La card mantiene sempre la stessa altezza indipendentemente dalla lunghezza del contenuto.",
+                    author: "Autore con Nome Molto Lungo"
+                ),
+                horizontalPadding: 0,
+                isHorizontalScroll: true
+            )
+            .frame(width: 300)
+        }
+        .padding(.horizontal, 16)
     }
-    .padding()
     .background(Color(UIColor.systemBackground))
 }
 
@@ -268,7 +301,7 @@ struct FullPoemView: View {
     FullPoemView(
         poem: Poem(
             title: "Poesia Completa",
-            poem: "Questa è la vista completa della poesia che si apre quando si tocca una card troncata. Il testo è mostrato per intero con una formattazione ottimizzata per la lettura. Il pulsante di copia è ora centrato e ben visibile.",
+            poem: "Questa è la vista completa della poesia che si apre quando si tocca una card o si preme il pulsante espandi. Il testo è mostrato per intero con una formattazione ottimizzata per la lettura. Il pulsante di copia è centrato e ben visibile.",
             author: "Autore Esempio"
         )
     )
