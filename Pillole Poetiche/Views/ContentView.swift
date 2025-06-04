@@ -1,12 +1,18 @@
 import SwiftUI
 
+// Struct per gestire il binding dello sheet con item
+struct AuthorItem: Identifiable {
+    let id = UUID()
+    let name: String
+}
+
 struct ContentView: View {
     @StateObject private var poemsData = PoemsData()
     @State private var randomPoem: Poem?
     @State private var shuffledPoems: [Poem] = []
     @State private var searchText = ""
     @State private var selectedAuthor: String?
-    @State private var showAuthorSheet = false
+    @State private var selectedAuthorItem: AuthorItem?
     @State private var rotationAngle: Double = 0
     @State private var isDataLoaded = false
     
@@ -126,7 +132,7 @@ struct ContentView: View {
                                         isLast: index == filteredAuthors.count - 1
                                     ) {
                                         selectedAuthor = author
-                                        showAuthorSheet = true
+                                        selectedAuthorItem = AuthorItem(name: author)
                                     }
                                 }
                             }
@@ -167,53 +173,31 @@ struct ContentView: View {
         .onAppear {
             setupInitialData()
         }
-        .sheet(isPresented: $showAuthorSheet, onDismiss: {
-            // Reset quando lo sheet si chiude
+        .sheet(item: $selectedAuthorItem, onDismiss: {
             selectedAuthor = nil
-        }) {
-            if let author = selectedAuthor, isDataLoaded {
-                let authorPoems = poemsData.getPoemsByAuthor(author)
-                if !authorPoems.isEmpty {
-                    AuthorDetailView(
-                        author: author,
-                        poems: authorPoems
-                    )
-                } else {
-                    // Fallback se non ci sono poesie
-                    NavigationStack {
-                        ContentUnavailableView(
-                            "Nessuna poesia trovata",
-                            systemImage: "doc.text",
-                            description: Text("Non sono state trovate poesie per \(author)")
-                        )
-                        .navigationTitle(author)
-                        .navigationBarTitleDisplayMode(.inline)
-                        .toolbar {
-                            ToolbarItem(placement: .navigationBarTrailing) {
-                                Button("Chiudi") {
-                                    dismissSheet()
-                                }
-                                .foregroundStyle(.blue)
-                                .fontWeight(.medium)
-                            }
-                        }
-                    }
-                    .presentationDragIndicator(.visible)
-                }
+        }) { authorItem in
+            // Ora abbiamo sempre un autore valido grazie al binding item
+            let authorPoems = poemsData.getPoemsByAuthor(authorItem.name)
+            
+            if !authorPoems.isEmpty {
+                AuthorDetailView(
+                    author: authorItem.name,
+                    poems: authorPoems
+                )
             } else {
-                // Fallback se selectedAuthor è nil o dati non caricati
+                // Fallback se non ci sono poesie per questo autore
                 NavigationStack {
                     ContentUnavailableView(
-                        "Caricamento in corso",
-                        systemImage: "hourglass",
-                        description: Text("I dati stanno ancora caricando, riprova tra un momento")
+                        "Nessuna poesia trovata",
+                        systemImage: "doc.text",
+                        description: Text("Non sono state trovate poesie per \(authorItem.name)")
                     )
-                    .navigationTitle("Caricamento")
+                    .navigationTitle(authorItem.name)
                     .navigationBarTitleDisplayMode(.inline)
                     .toolbar {
                         ToolbarItem(placement: .navigationBarTrailing) {
                             Button("Chiudi") {
-                                dismissSheet()
+                                selectedAuthorItem = nil
                             }
                             .foregroundStyle(.blue)
                             .fontWeight(.medium)
@@ -226,32 +210,23 @@ struct ContentView: View {
     }
     
     private func setupInitialData() {
-        // Verifica che PoemsData abbia i dati
+        // CORREZIONE: Impostiamo immediatamente isDataLoaded a true dato che PoemsData carica i dati nel suo init
+        isDataLoaded = true
+        
+        // Carica i dati
+        randomPoem = poemsData.getRandomPoem()
+        shuffledPoems = poemsData.getShuffledPoems()
+        
+        // Debug info
         let totalPoems = poemsData.poems.count
         let totalAuthors = poemsData.getUniqueAuthors().count
         
         print("📊 Setup iniziale:")
         print("   - Poesie totali: \(totalPoems)")
         print("   - Autori totali: \(totalAuthors)")
-        
-        // Carica immediatamente i dati all'apertura
-        randomPoem = poemsData.getRandomPoem()
-        shuffledPoems = poemsData.getShuffledPoems()
-        
         print("   - Poesia casuale: \(randomPoem?.title ?? "Nessuna")")
         print("   - Poesie shuffle: \(shuffledPoems.count)")
-        
-        // Marca i dati come caricati immediatamente solo se ci sono davvero dati
-        if totalPoems > 0 && totalAuthors > 0 {
-            isDataLoaded = true
-            print("✅ Dati caricati con successo!")
-        } else {
-            print("❌ Errore: Nessun dato trovato!")
-            // Riprova dopo un breve delay
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                setupInitialData()
-            }
-        }
+        print("✅ Dati caricati con successo!")
     }
     
     private func refreshRandomPoem() {
@@ -266,14 +241,6 @@ struct ContentView: View {
         // Feedback aptico
         let impact = UIImpactFeedbackGenerator(style: .light)
         impact.impactOccurred()
-    }
-    
-    private func dismissSheet() {
-        showAuthorSheet = false
-        // Reset selectedAuthor dopo una breve pausa per evitare problemi di timing
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            selectedAuthor = nil
-        }
     }
 }
 
@@ -344,8 +311,8 @@ struct AuthorRowView: View {
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
-        .disabled(poemCount == 0) // Disabilita se non ci sono poesie
-        .opacity(poemCount == 0 ? 0.6 : 1.0) // Rendi visivamente disabilitato
+        .disabled(poemCount == 0)
+        .opacity(poemCount == 0 ? 0.6 : 1.0)
         
         if !isLast {
             Divider()
