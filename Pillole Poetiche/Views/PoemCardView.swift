@@ -10,6 +10,25 @@ struct PoemCardView: View {
     // CORREZIONE: Altezza fissa per le card del carousel
     private let fixedCardHeight: CGFloat = 280
     
+    // CORREZIONE: Computed property per il testo troncato con limiti diversi
+    private var truncatedText: String {
+        // Limite diverso a seconda se c'è il titolo o no
+        let characterLimit = poem.title.isEmpty ? 210 : 162
+        
+        if poem.poem.count <= characterLimit {
+            return poem.poem
+        } else {
+            let truncated = String(poem.poem.prefix(characterLimit))
+            return truncated + "..."
+        }
+    }
+    
+    // Computed property per verificare se il testo è troncato
+    private var isTextTruncated: Bool {
+        let characterLimit = poem.title.isEmpty ? 210 : 162
+        return poem.poem.count > characterLimit
+    }
+    
     init(poem: Poem, horizontalPadding: CGFloat = 16, isHorizontalScroll: Bool = false) {
         self.poem = poem
         self.horizontalPadding = horizontalPadding
@@ -28,18 +47,15 @@ struct PoemCardView: View {
                     .lineLimit(isHorizontalScroll ? 2 : nil) // Limita il titolo nel carousel
             }
             
-            // CORREZIONE: Testo della poesia con gestione intelligente dello spazio
+            // CORREZIONE: Testo della poesia con troncamento fisso per il carousel
             if isHorizontalScroll {
-                // Nel carousel, usiamo uno ScrollView interno per testi molto lunghi
-                ScrollView {
-                    Text(poem.poem)
-                        .font(.body)
-                        .foregroundStyle(.secondary)
-                        .multilineTextAlignment(.leading)
-                        .lineSpacing(6)
-                        .fixedSize(horizontal: false, vertical: true)
-                }
-                .frame(maxHeight: calculateTextHeight()) // Altezza dinamica basata sul contenuto disponibile
+                // Nel carousel, tronchiamo a 162 caratteri senza ScrollView
+                Text(truncatedText)
+                    .font(.body)
+                    .foregroundStyle(.secondary)
+                    .multilineTextAlignment(.leading)
+                    .lineSpacing(6)
+                    .fixedSize(horizontal: false, vertical: true)
             } else {
                 // Card normale senza limitazioni
                 Text(poem.poem)
@@ -67,8 +83,8 @@ struct PoemCardView: View {
                 Spacer()
                 
                 HStack(spacing: 12) {
-                    // Pulsante "Leggi tutto" sempre presente nel carousel
-                    if isHorizontalScroll {
+                    // Pulsante "Espandi" se il testo è troncato
+                    if isHorizontalScroll && isTextTruncated {
                         Button(action: { showFullPoem = true }) {
                             Label("Espandi", systemImage: "arrow.up.left.and.arrow.down.right")
                                 .labelStyle(.iconOnly)
@@ -97,7 +113,7 @@ struct PoemCardView: View {
         .padding(.horizontal, horizontalPadding)
         .contentShape(Rectangle())
         .onTapGesture {
-            if isHorizontalScroll {
+            if isHorizontalScroll && isTextTruncated {
                 showFullPoem = true
             }
         }
@@ -105,16 +121,6 @@ struct PoemCardView: View {
             FullPoemView(poem: poem)
                 .presentationDragIndicator(.visible)
         }
-    }
-    
-    // CORREZIONE: Calcola l'altezza massima disponibile per il testo nel carousel
-    private func calculateTextHeight() -> CGFloat {
-        let titleHeight: CGFloat = poem.title.isEmpty ? 0 : 50 // Stima altezza titolo
-        let authorHeight: CGFloat = 40 // Stima altezza sezione autore/pulsanti
-        let padding: CGFloat = 56 // Padding totale (20 * 2 + spacing)
-        let spacing: CGFloat = 32 // Spacing tra elementi (16 * 2)
-        
-        return fixedCardHeight - titleHeight - authorHeight - padding - spacing
     }
     
     private func copyPoem() {
@@ -253,26 +259,14 @@ struct FullPoemView: View {
     .background(Color(UIColor.systemBackground))
 }
 
-#Preview("Card Carousel - Altezza Fissa") {
+#Preview("Card Carousel - Troncamento Intelligente") {
     ScrollView(.horizontal, showsIndicators: false) {
         LazyHStack(spacing: 16) {
-            // Poesia corta
+            // Poesia CON titolo - limite 162 caratteri
             PoemCardView(
                 poem: Poem(
-                    title: "Breve",
-                    poem: "Testo breve che viene visualizzato in una card di altezza fissa.",
-                    author: "Autore"
-                ),
-                horizontalPadding: 0,
-                isHorizontalScroll: true
-            )
-            .frame(width: 300)
-            
-            // Poesia media
-            PoemCardView(
-                poem: Poem(
-                    title: "Media",
-                    poem: "Questo è un testo di media lunghezza che dovrebbe adattarsi bene alla card di altezza fissa senza creare problemi di sovrapposizione con altri elementi dell'interfaccia.",
+                    title: "Con Titolo",
+                    poem: "Questa poesia ha un titolo, quindi viene troncata a 162 caratteri. Questo testo è abbastanza lungo da superare il limite di 162 caratteri e dovrebbe essere troncato con tre puntini per mostrare che c'è altro contenuto da leggere nella vista completa.",
                     author: "Autore Test"
                 ),
                 horizontalPadding: 0,
@@ -280,12 +274,36 @@ struct FullPoemView: View {
             )
             .frame(width: 300)
             
-            // Poesia lunga
+            // Poesia SENZA titolo - limite 210 caratteri
             PoemCardView(
                 poem: Poem(
-                    title: "Lunga con titolo molto lungo che potrebbe andare su più righe",
-                    poem: "Questo è un testo molto lungo che prima causava problemi di sovrapposizione. Ora con l'altezza fissa e lo ScrollView interno, il testo si adatta perfettamente senza interferire con altri elementi. L'utente può scorrere per leggere tutto il contenuto all'interno della card oppure toccare per aprire la vista completa. Questo approccio risolve il problema delle card che si compenetravano con la scritta 'Scorri poesie' e mantiene un layout pulito e consistente. Il testo continua qui per testare come si comporta lo scroll interno quando abbiamo davvero molto contenuto da visualizzare. La card mantiene sempre la stessa altezza indipendentemente dalla lunghezza del contenuto.",
-                    author: "Autore con Nome Molto Lungo"
+                    title: "",
+                    poem: "Questa poesia non ha titolo, quindi viene troncata a 210 caratteri. Avendo più spazio disponibile (senza il titolo), può contenere molto più testo prima di essere troncata. Questo permette di sfruttare meglio lo spazio della card quando non c'è un titolo da mostrare. Il limite è molto più alto per ottimizzare l'esperienza di lettura e permettere di vedere più contenuto direttamente nella card del carousel.",
+                    author: "Autore Senza Titolo"
+                ),
+                horizontalPadding: 0,
+                isHorizontalScroll: true
+            )
+            .frame(width: 300)
+            
+            // Poesia breve CON titolo (non troncata)
+            PoemCardView(
+                poem: Poem(
+                    title: "Breve",
+                    poem: "Testo breve che non viene troncato.",
+                    author: "Autore"
+                ),
+                horizontalPadding: 0,
+                isHorizontalScroll: true
+            )
+            .frame(width: 300)
+            
+            // Poesia breve SENZA titolo (non troncata)
+            PoemCardView(
+                poem: Poem(
+                    title: "",
+                    poem: "Testo breve senza titolo che non viene troncato perché è sotto il limite di 210 caratteri per le poesie senza titolo.",
+                    author: "Autore"
                 ),
                 horizontalPadding: 0,
                 isHorizontalScroll: true
