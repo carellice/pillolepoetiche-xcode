@@ -7,7 +7,68 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		90D063AE2DF0D49700728991 /* albert_einstein.png in Resources */ = {isa = PBXBuildFile; fileRef = 90D063AD2DF0D49700728991 /* albert_einstein.png */; };
+		9040F5CF2DF10ADD006E5718 /* platone.png in Resources */ = {isa = PBXBuildFile; fileRef = 9040F5BD2DF10ADD006E5718 /* platone.png */; };
+		9040F5D02DF10ADD006E5718 /* william_james.png in Resources */ = {isa = PBXBuildFile; fileRef = 9040F5CC2DF10ADD006E5718 /* william_james.png */; };
+		9040F5D12DF10ADD006E5718 /* enrico_galianio.png in Resources */ = {isa = PBXBuildFile; fileRef = 9040F5A02DF10ADD006E5718 /* enrico_galianio.png */; };
+		9040F5D22DF10ADD006E5718 /* emily_bronte.png in Resources */ = {isa = PBXBuildFile; fileRef = 9040F59F2DF10ADD006E5718 /* emily_bronte.png */; };
+		9040F5D32DF10ADD006E5718 /* erich_fromm.png in Resources */ = {isa = PBXBuildFile; fileRef = 9040F5A12DF10ADD006E5718 /* erich_fromm.png */; };
+		9040F5D42DF10ADD006E5718 /* maya_angelou.png in Resources */ = {isa = PBXBuildFile; fileRef = 9040F5B82DF10ADD006E5718 /* maya_angelou.png */; };
+		9040F5D52DF10ADD006E5718 /* pablo_neruda.png in Resources */ = {isa = PBXBuildFile; fileRef = 9040F5BB2DF10ADD006E5718 /* pablo_neruda.png */; };
+		9040F5D62DF10ADD006E5718 /* ovidio.png in Resources */ = {isa = PBXBuildFile; fileRef = 9040F5BA2DF10ADD006E5718 /* ovidio.png */; };
+		9040F5D72DF10ADD006E5718 /* seneca.png in Resources */ = {isa = PBXBuildFile; fileRef = 9040F5C42DF10ADD006E5718 /* seneca.png */; };
+		9040F5D82DF10ADD006E5718 /* sofocle.png in Resources */ = {isa = PBXBuildFile; fileRef = 9040F5C72DF10ADD006E5718 /* sofocle.png */; };
+		9040F5D92DF10ADD006E5718 /* gianluca_gotto.png in Resources */ = {isa = PBXBuildFile; fileRef = 9040F5AA2DF10ADD006E5718 /* gianluca_gotto.png */; };
+		9040F5DA2DF10ADD006E5718 /* stephen_hawking.png in Resources */ = {isa = PBXBuildFile; fileRef = 9040F5C82DF10ADD006E5718 /* stephen_hawking.png */; };
+		9040F5DB2DF10ADD006E5718 /* italo_calvino.png in Resources */ = {isa = PBXBuildFile; fileRef = 9040F5AE2DF10ADD006E5718 /* italo_calvino.png */; };
+		9040F5DC2DF10ADD006E5718 /* luigi_pirandello.png in Resources */ = {isa = PBXBuildFile; fileRef = 9040F5B32DF10ADD006E5718 /* luigi_pirandello.png */; };
+		9040F5DD2DF10ADD006E5718 /* may_parker.png in Resources */ = {isa = PBXBuildFile; fileRef = 9040F5B72DF10ADD006E5718 /* may_parker.png */; };
+		9040F5DE2DF10ADD006E5718 /* sigmund_freud.png in Resources */ = {isa = PBXBuildFile; fileRef = 9040F5C52DF10ADD006E5718 /* sigmund_freud.png */; };
+		9040F5DF2DF10ADD006E5718 /* charles_dickens.png in Resources */ = {isa = PBXBuildFile; fileRef = 9040F59D2DF10ADD006E5718 /* charles_dickens.png */; };
+		9040F5E02DF10ADD006E5718 /* zero_calcare.png in Resources */ = {isa = PBXBuildFile; fileRef = 9040F5CE2DF10ADD006E5718 /* zero_calcare.png */; };
+		9040F5E12DF10ADD006E5718 /* van_gogh.png in Resources */ = {isa = PBXBuildFile; fileRef = 9040F5CB2DF10ADD006E5718 /* van_gogh.png */; };
+		9040F5E22DF10ADD006E5718 /* marcel_proust.png in Resources */ = {isa = PBXBuildFile; fileRef = 9040F5B42DF10ADD006E5718 /* marcel_proust.png */; };
+		9040F5E32DF10ADD006E5718 /* eugenio_montale.png in Resources */ = {isa = PBXBuildFile; fileRef = 9040F5A32DF10ADD006E5718 /* eugenio_montale.png */; };
+		9040F5E42DF10ADD006E5718 /* william_shakespeare.png in Resources */ = {isa = PBXBuildFile; fileRef = 9040F5CD2DF10ADD006E5718 /* william_shakespeare.png */; };
+		9040F5E52DF10ADD006E5718 /* roberto_benigni.png in Resources */ = {isa = PBXBuildFile; fileRef = 9040F5BF2DF10ADD006E5718 /* roberto_benigni.png */; };
+		9040F5E62DF10ADD006E5718 /* richard_yates.png in Resources */ = {isa = PBXBuildFile; fileRef = 9040F5BE2DF10ADD006E5718 /* richard_yates.png */; };
+		9040F5E72DF10ADD006E5718 /* confucio.png in Resources */ = {isa = PBXBuildFile; fileRef = 9040F59E2DF10ADD006E5718 /* confucio.png */; };
+		9040F5E82DF10ADD006E5718 /* carl_jung.png in Resources */ = {isa = PBXBuildFile; fileRef = 9040F5992DF10ADD006E5718 /* carl_jung.png */; };
+		9040F5E92DF10ADD006E5718 /* alexander_bell.png in Resources */ = {isa = PBXBuildFile; fileRef = 9040F5952DF10ADD006E5718 /* alexander_bell.png */; };
+		9040F5EA2DF10ADD006E5718 /* ghiannis_ritsos.png in Resources */ = {isa = PBXBuildFile; fileRef = 9040F5A82DF10ADD006E5718 /* ghiannis_ritsos.png */; };
+		9040F5EB2DF10ADD006E5718 /* saramago.png in Resources */ = {isa = PBXBuildFile; fileRef = 9040F5C32DF10ADD006E5718 /* saramago.png */; };
+		9040F5EC2DF10ADD006E5718 /* theodore_roosevelt.png in Resources */ = {isa = PBXBuildFile; fileRef = 9040F5C92DF10ADD006E5718 /* theodore_roosevelt.png */; };
+		9040F5ED2DF10ADD006E5718 /* franz_kafka.png in Resources */ = {isa = PBXBuildFile; fileRef = 9040F5A62DF10ADD006E5718 /* franz_kafka.png */; };
+		9040F5EE2DF10ADD006E5718 /* anthony_robbins.png in Resources */ = {isa = PBXBuildFile; fileRef = 9040F5962DF10ADD006E5718 /* anthony_robbins.png */; };
+		9040F5EF2DF10ADD006E5718 /* henri_matisse.png in Resources */ = {isa = PBXBuildFile; fileRef = 9040F5AD2DF10ADD006E5718 /* henri_matisse.png */; };
+		9040F5F02DF10ADD006E5718 /* mark_twain.png in Resources */ = {isa = PBXBuildFile; fileRef = 9040F5B62DF10ADD006E5718 /* mark_twain.png */; };
+		9040F5F12DF10ADD006E5718 /* leonard_cohen.png in Resources */ = {isa = PBXBuildFile; fileRef = 9040F5B22DF10ADD006E5718 /* leonard_cohen.png */; };
+		9040F5F22DF10ADD006E5718 /* goethe.png in Resources */ = {isa = PBXBuildFile; fileRef = 9040F5AC2DF10ADD006E5718 /* goethe.png */; };
+		9040F5F32DF10ADD006E5718 /* alessandro_manzoni.png in Resources */ = {isa = PBXBuildFile; fileRef = 9040F5942DF10ADD006E5718 /* alessandro_manzoni.png */; };
+		9040F5F42DF10ADD006E5718 /* marco_aurelio.png in Resources */ = {isa = PBXBuildFile; fileRef = 9040F5B52DF10ADD006E5718 /* marco_aurelio.png */; };
+		9040F5F52DF10ADD006E5718 /* ugo_foscolo.png in Resources */ = {isa = PBXBuildFile; fileRef = 9040F5CA2DF10ADD006E5718 /* ugo_foscolo.png */; };
+		9040F5F62DF10ADD006E5718 /* catullo.png in Resources */ = {isa = PBXBuildFile; fileRef = 9040F59A2DF10ADD006E5718 /* catullo.png */; };
+		9040F5F72DF10ADD006E5718 /* john_keats.png in Resources */ = {isa = PBXBuildFile; fileRef = 9040F5B12DF10ADD006E5718 /* john_keats.png */; };
+		9040F5F82DF10ADD006E5718 /* dostoevskij.png in Resources */ = {isa = PBXBuildFile; fileRef = 9040F5A42DF10ADD006E5718 /* dostoevskij.png */; };
+		9040F5F92DF10ADD006E5718 /* ernest_hemingway.png in Resources */ = {isa = PBXBuildFile; fileRef = 9040F5A22DF10ADD006E5718 /* ernest_hemingway.png */; };
+		9040F5FA2DF10ADD006E5718 /* giacomo_leopardi.png in Resources */ = {isa = PBXBuildFile; fileRef = 9040F5A92DF10ADD006E5718 /* giacomo_leopardi.png */; };
+		9040F5FB2DF10ADD006E5718 /* charles_bukowski.png in Resources */ = {isa = PBXBuildFile; fileRef = 9040F59C2DF10ADD006E5718 /* charles_bukowski.png */; };
+		9040F5FC2DF10ADD006E5718 /* pasolini.png in Resources */ = {isa = PBXBuildFile; fileRef = 9040F5BC2DF10ADD006E5718 /* pasolini.png */; };
+		9040F5FD2DF10ADD006E5718 /* oscar_wilde.png in Resources */ = {isa = PBXBuildFile; fileRef = 9040F5B92DF10ADD006E5718 /* oscar_wilde.png */; };
+		9040F5FE2DF10ADD006E5718 /* albert_einstein.png in Resources */ = {isa = PBXBuildFile; fileRef = 9040F5922DF10ADD006E5718 /* albert_einstein.png */; };
+		9040F5FF2DF10ADD006E5718 /* blaga_dimitrova.png in Resources */ = {isa = PBXBuildFile; fileRef = 9040F5972DF10ADD006E5718 /* blaga_dimitrova.png */; };
+		9040F6002DF10ADD006E5718 /* saint_exupery.png in Resources */ = {isa = PBXBuildFile; fileRef = 9040F5C12DF10ADD006E5718 /* saint_exupery.png */; };
+		9040F6012DF10ADD006E5718 /* giovanni_pascoli.png in Resources */ = {isa = PBXBuildFile; fileRef = 9040F5AB2DF10ADD006E5718 /* giovanni_pascoli.png */; };
+		9040F6022DF10ADD006E5718 /* rousseau.png in Resources */ = {isa = PBXBuildFile; fileRef = 9040F5C02DF10ADD006E5718 /* rousseau.png */; };
+		9040F6032DF10ADD006E5718 /* alda_merini.png in Resources */ = {isa = PBXBuildFile; fileRef = 9040F5932DF10ADD006E5718 /* alda_merini.png */; };
+		9040F6042DF10ADD006E5718 /* friedrich_nietzsche.png in Resources */ = {isa = PBXBuildFile; fileRef = 9040F5A72DF10ADD006E5718 /* friedrich_nietzsche.png */; };
+		9040F6052DF10ADD006E5718 /* socrate.png in Resources */ = {isa = PBXBuildFile; fileRef = 9040F5C62DF10ADD006E5718 /* socrate.png */; };
+		9040F6062DF10ADD006E5718 /* francesco_piscitelli.png in Resources */ = {isa = PBXBuildFile; fileRef = 9040F5A52DF10ADD006E5718 /* francesco_piscitelli.png */; };
+		9040F6072DF10ADD006E5718 /* jimi_hendrix.png in Resources */ = {isa = PBXBuildFile; fileRef = 9040F5B02DF10ADD006E5718 /* jimi_hendrix.png */; };
+		9040F6082DF10ADD006E5718 /* salvatore_quasimodo.png in Resources */ = {isa = PBXBuildFile; fileRef = 9040F5C22DF10ADD006E5718 /* salvatore_quasimodo.png */; };
+		9040F6092DF10ADD006E5718 /* cesare_pavese.png in Resources */ = {isa = PBXBuildFile; fileRef = 9040F59B2DF10ADD006E5718 /* cesare_pavese.png */; };
+		9040F60A2DF10ADD006E5718 /* italo_svevo.png in Resources */ = {isa = PBXBuildFile; fileRef = 9040F5AF2DF10ADD006E5718 /* italo_svevo.png */; };
+		9040F60B2DF10ADD006E5718 /* brandon_sanderson.png in Resources */ = {isa = PBXBuildFile; fileRef = 9040F5982DF10ADD006E5718 /* brandon_sanderson.png */; };
+		9040F60D2DF10BE6006E5718 /* borges.png in Resources */ = {isa = PBXBuildFile; fileRef = 9040F60C2DF10BE6006E5718 /* borges.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,10 +89,71 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9040F5922DF10ADD006E5718 /* albert_einstein.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = albert_einstein.png; sourceTree = "<group>"; };
+		9040F5932DF10ADD006E5718 /* alda_merini.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = alda_merini.png; sourceTree = "<group>"; };
+		9040F5942DF10ADD006E5718 /* alessandro_manzoni.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = alessandro_manzoni.png; sourceTree = "<group>"; };
+		9040F5952DF10ADD006E5718 /* alexander_bell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = alexander_bell.png; sourceTree = "<group>"; };
+		9040F5962DF10ADD006E5718 /* anthony_robbins.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = anthony_robbins.png; sourceTree = "<group>"; };
+		9040F5972DF10ADD006E5718 /* blaga_dimitrova.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blaga_dimitrova.png; sourceTree = "<group>"; };
+		9040F5982DF10ADD006E5718 /* brandon_sanderson.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = brandon_sanderson.png; sourceTree = "<group>"; };
+		9040F5992DF10ADD006E5718 /* carl_jung.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = carl_jung.png; sourceTree = "<group>"; };
+		9040F59A2DF10ADD006E5718 /* catullo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = catullo.png; sourceTree = "<group>"; };
+		9040F59B2DF10ADD006E5718 /* cesare_pavese.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cesare_pavese.png; sourceTree = "<group>"; };
+		9040F59C2DF10ADD006E5718 /* charles_bukowski.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = charles_bukowski.png; sourceTree = "<group>"; };
+		9040F59D2DF10ADD006E5718 /* charles_dickens.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = charles_dickens.png; sourceTree = "<group>"; };
+		9040F59E2DF10ADD006E5718 /* confucio.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = confucio.png; sourceTree = "<group>"; };
+		9040F59F2DF10ADD006E5718 /* emily_bronte.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emily_bronte.png; sourceTree = "<group>"; };
+		9040F5A02DF10ADD006E5718 /* enrico_galianio.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = enrico_galianio.png; sourceTree = "<group>"; };
+		9040F5A12DF10ADD006E5718 /* erich_fromm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = erich_fromm.png; sourceTree = "<group>"; };
+		9040F5A22DF10ADD006E5718 /* ernest_hemingway.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ernest_hemingway.png; sourceTree = "<group>"; };
+		9040F5A32DF10ADD006E5718 /* eugenio_montale.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eugenio_montale.png; sourceTree = "<group>"; };
+		9040F5A42DF10ADD006E5718 /* dostoevskij.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dostoevskij.png; sourceTree = "<group>"; };
+		9040F5A52DF10ADD006E5718 /* francesco_piscitelli.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = francesco_piscitelli.png; sourceTree = "<group>"; };
+		9040F5A62DF10ADD006E5718 /* franz_kafka.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = franz_kafka.png; sourceTree = "<group>"; };
+		9040F5A72DF10ADD006E5718 /* friedrich_nietzsche.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = friedrich_nietzsche.png; sourceTree = "<group>"; };
+		9040F5A82DF10ADD006E5718 /* ghiannis_ritsos.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ghiannis_ritsos.png; sourceTree = "<group>"; };
+		9040F5A92DF10ADD006E5718 /* giacomo_leopardi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = giacomo_leopardi.png; sourceTree = "<group>"; };
+		9040F5AA2DF10ADD006E5718 /* gianluca_gotto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gianluca_gotto.png; sourceTree = "<group>"; };
+		9040F5AB2DF10ADD006E5718 /* giovanni_pascoli.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = giovanni_pascoli.png; sourceTree = "<group>"; };
+		9040F5AC2DF10ADD006E5718 /* goethe.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = goethe.png; sourceTree = "<group>"; };
+		9040F5AD2DF10ADD006E5718 /* henri_matisse.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = henri_matisse.png; sourceTree = "<group>"; };
+		9040F5AE2DF10ADD006E5718 /* italo_calvino.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = italo_calvino.png; sourceTree = "<group>"; };
+		9040F5AF2DF10ADD006E5718 /* italo_svevo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = italo_svevo.png; sourceTree = "<group>"; };
+		9040F5B02DF10ADD006E5718 /* jimi_hendrix.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jimi_hendrix.png; sourceTree = "<group>"; };
+		9040F5B12DF10ADD006E5718 /* john_keats.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = john_keats.png; sourceTree = "<group>"; };
+		9040F5B22DF10ADD006E5718 /* leonard_cohen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = leonard_cohen.png; sourceTree = "<group>"; };
+		9040F5B32DF10ADD006E5718 /* luigi_pirandello.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = luigi_pirandello.png; sourceTree = "<group>"; };
+		9040F5B42DF10ADD006E5718 /* marcel_proust.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = marcel_proust.png; sourceTree = "<group>"; };
+		9040F5B52DF10ADD006E5718 /* marco_aurelio.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = marco_aurelio.png; sourceTree = "<group>"; };
+		9040F5B62DF10ADD006E5718 /* mark_twain.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mark_twain.png; sourceTree = "<group>"; };
+		9040F5B72DF10ADD006E5718 /* may_parker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = may_parker.png; sourceTree = "<group>"; };
+		9040F5B82DF10ADD006E5718 /* maya_angelou.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = maya_angelou.png; sourceTree = "<group>"; };
+		9040F5B92DF10ADD006E5718 /* oscar_wilde.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = oscar_wilde.png; sourceTree = "<group>"; };
+		9040F5BA2DF10ADD006E5718 /* ovidio.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ovidio.png; sourceTree = "<group>"; };
+		9040F5BB2DF10ADD006E5718 /* pablo_neruda.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pablo_neruda.png; sourceTree = "<group>"; };
+		9040F5BC2DF10ADD006E5718 /* pasolini.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pasolini.png; sourceTree = "<group>"; };
+		9040F5BD2DF10ADD006E5718 /* platone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = platone.png; sourceTree = "<group>"; };
+		9040F5BE2DF10ADD006E5718 /* richard_yates.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = richard_yates.png; sourceTree = "<group>"; };
+		9040F5BF2DF10ADD006E5718 /* roberto_benigni.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = roberto_benigni.png; sourceTree = "<group>"; };
+		9040F5C02DF10ADD006E5718 /* rousseau.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rousseau.png; sourceTree = "<group>"; };
+		9040F5C12DF10ADD006E5718 /* saint_exupery.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = saint_exupery.png; sourceTree = "<group>"; };
+		9040F5C22DF10ADD006E5718 /* salvatore_quasimodo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = salvatore_quasimodo.png; sourceTree = "<group>"; };
+		9040F5C32DF10ADD006E5718 /* saramago.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = saramago.png; sourceTree = "<group>"; };
+		9040F5C42DF10ADD006E5718 /* seneca.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = seneca.png; sourceTree = "<group>"; };
+		9040F5C52DF10ADD006E5718 /* sigmund_freud.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sigmund_freud.png; sourceTree = "<group>"; };
+		9040F5C62DF10ADD006E5718 /* socrate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = socrate.png; sourceTree = "<group>"; };
+		9040F5C72DF10ADD006E5718 /* sofocle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sofocle.png; sourceTree = "<group>"; };
+		9040F5C82DF10ADD006E5718 /* stephen_hawking.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stephen_hawking.png; sourceTree = "<group>"; };
+		9040F5C92DF10ADD006E5718 /* theodore_roosevelt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = theodore_roosevelt.png; sourceTree = "<group>"; };
+		9040F5CA2DF10ADD006E5718 /* ugo_foscolo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ugo_foscolo.png; sourceTree = "<group>"; };
+		9040F5CB2DF10ADD006E5718 /* van_gogh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = van_gogh.png; sourceTree = "<group>"; };
+		9040F5CC2DF10ADD006E5718 /* william_james.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = william_james.png; sourceTree = "<group>"; };
+		9040F5CD2DF10ADD006E5718 /* william_shakespeare.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = william_shakespeare.png; sourceTree = "<group>"; };
+		9040F5CE2DF10ADD006E5718 /* zero_calcare.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zero_calcare.png; sourceTree = "<group>"; };
+		9040F60C2DF10BE6006E5718 /* borges.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = borges.png; sourceTree = "<group>"; };
 		90D0634B2DF0C3EA00728991 /* Pillole Poetiche.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pillole Poetiche.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		90D063582DF0C3EB00728991 /* Pillole PoeticheTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Pillole PoeticheTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		90D063622DF0C3EB00728991 /* Pillole PoeticheUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Pillole PoeticheUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		90D063AD2DF0D49700728991 /* albert_einstein.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = albert_einstein.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -101,7 +223,68 @@
 		90D063932DF0D1DD00728991 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				90D063AD2DF0D49700728991 /* albert_einstein.png */,
+				9040F5922DF10ADD006E5718 /* albert_einstein.png */,
+				9040F5932DF10ADD006E5718 /* alda_merini.png */,
+				9040F5942DF10ADD006E5718 /* alessandro_manzoni.png */,
+				9040F5952DF10ADD006E5718 /* alexander_bell.png */,
+				9040F5962DF10ADD006E5718 /* anthony_robbins.png */,
+				9040F5972DF10ADD006E5718 /* blaga_dimitrova.png */,
+				9040F5982DF10ADD006E5718 /* brandon_sanderson.png */,
+				9040F5992DF10ADD006E5718 /* carl_jung.png */,
+				9040F59A2DF10ADD006E5718 /* catullo.png */,
+				9040F59B2DF10ADD006E5718 /* cesare_pavese.png */,
+				9040F59C2DF10ADD006E5718 /* charles_bukowski.png */,
+				9040F59D2DF10ADD006E5718 /* charles_dickens.png */,
+				9040F59E2DF10ADD006E5718 /* confucio.png */,
+				9040F59F2DF10ADD006E5718 /* emily_bronte.png */,
+				9040F5A02DF10ADD006E5718 /* enrico_galianio.png */,
+				9040F5A12DF10ADD006E5718 /* erich_fromm.png */,
+				9040F5A22DF10ADD006E5718 /* ernest_hemingway.png */,
+				9040F5A32DF10ADD006E5718 /* eugenio_montale.png */,
+				9040F5A42DF10ADD006E5718 /* dostoevskij.png */,
+				9040F5A52DF10ADD006E5718 /* francesco_piscitelli.png */,
+				9040F5A62DF10ADD006E5718 /* franz_kafka.png */,
+				9040F5A72DF10ADD006E5718 /* friedrich_nietzsche.png */,
+				9040F5A82DF10ADD006E5718 /* ghiannis_ritsos.png */,
+				9040F5A92DF10ADD006E5718 /* giacomo_leopardi.png */,
+				9040F5AA2DF10ADD006E5718 /* gianluca_gotto.png */,
+				9040F5AB2DF10ADD006E5718 /* giovanni_pascoli.png */,
+				9040F5AC2DF10ADD006E5718 /* goethe.png */,
+				9040F5AD2DF10ADD006E5718 /* henri_matisse.png */,
+				9040F5AE2DF10ADD006E5718 /* italo_calvino.png */,
+				9040F5AF2DF10ADD006E5718 /* italo_svevo.png */,
+				9040F5B02DF10ADD006E5718 /* jimi_hendrix.png */,
+				9040F5B12DF10ADD006E5718 /* john_keats.png */,
+				9040F5B22DF10ADD006E5718 /* leonard_cohen.png */,
+				9040F5B32DF10ADD006E5718 /* luigi_pirandello.png */,
+				9040F5B52DF10ADD006E5718 /* marco_aurelio.png */,
+				9040F5B42DF10ADD006E5718 /* marcel_proust.png */,
+				9040F5B62DF10ADD006E5718 /* mark_twain.png */,
+				9040F5B72DF10ADD006E5718 /* may_parker.png */,
+				9040F5B82DF10ADD006E5718 /* maya_angelou.png */,
+				9040F5B92DF10ADD006E5718 /* oscar_wilde.png */,
+				9040F5BA2DF10ADD006E5718 /* ovidio.png */,
+				9040F5BB2DF10ADD006E5718 /* pablo_neruda.png */,
+				9040F5BD2DF10ADD006E5718 /* platone.png */,
+				9040F5BE2DF10ADD006E5718 /* richard_yates.png */,
+				9040F5BC2DF10ADD006E5718 /* pasolini.png */,
+				9040F5BF2DF10ADD006E5718 /* roberto_benigni.png */,
+				9040F5C02DF10ADD006E5718 /* rousseau.png */,
+				9040F5C12DF10ADD006E5718 /* saint_exupery.png */,
+				9040F5C22DF10ADD006E5718 /* salvatore_quasimodo.png */,
+				9040F5C32DF10ADD006E5718 /* saramago.png */,
+				9040F5C42DF10ADD006E5718 /* seneca.png */,
+				9040F5C52DF10ADD006E5718 /* sigmund_freud.png */,
+				9040F5C62DF10ADD006E5718 /* socrate.png */,
+				9040F5C72DF10ADD006E5718 /* sofocle.png */,
+				9040F5C82DF10ADD006E5718 /* stephen_hawking.png */,
+				9040F5C92DF10ADD006E5718 /* theodore_roosevelt.png */,
+				9040F5CA2DF10ADD006E5718 /* ugo_foscolo.png */,
+				9040F5CB2DF10ADD006E5718 /* van_gogh.png */,
+				9040F5CC2DF10ADD006E5718 /* william_james.png */,
+				9040F5CD2DF10ADD006E5718 /* william_shakespeare.png */,
+				9040F5CE2DF10ADD006E5718 /* zero_calcare.png */,
+				9040F60C2DF10BE6006E5718 /* borges.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -226,7 +409,68 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				90D063AE2DF0D49700728991 /* albert_einstein.png in Resources */,
+				9040F5CF2DF10ADD006E5718 /* platone.png in Resources */,
+				9040F5D02DF10ADD006E5718 /* william_james.png in Resources */,
+				9040F5D12DF10ADD006E5718 /* enrico_galianio.png in Resources */,
+				9040F5D22DF10ADD006E5718 /* emily_bronte.png in Resources */,
+				9040F5D32DF10ADD006E5718 /* erich_fromm.png in Resources */,
+				9040F5D42DF10ADD006E5718 /* maya_angelou.png in Resources */,
+				9040F5D52DF10ADD006E5718 /* pablo_neruda.png in Resources */,
+				9040F5D62DF10ADD006E5718 /* ovidio.png in Resources */,
+				9040F5D72DF10ADD006E5718 /* seneca.png in Resources */,
+				9040F5D82DF10ADD006E5718 /* sofocle.png in Resources */,
+				9040F5D92DF10ADD006E5718 /* gianluca_gotto.png in Resources */,
+				9040F5DA2DF10ADD006E5718 /* stephen_hawking.png in Resources */,
+				9040F5DB2DF10ADD006E5718 /* italo_calvino.png in Resources */,
+				9040F5DC2DF10ADD006E5718 /* luigi_pirandello.png in Resources */,
+				9040F5DD2DF10ADD006E5718 /* may_parker.png in Resources */,
+				9040F5DE2DF10ADD006E5718 /* sigmund_freud.png in Resources */,
+				9040F5DF2DF10ADD006E5718 /* charles_dickens.png in Resources */,
+				9040F5E02DF10ADD006E5718 /* zero_calcare.png in Resources */,
+				9040F60D2DF10BE6006E5718 /* borges.png in Resources */,
+				9040F5E12DF10ADD006E5718 /* van_gogh.png in Resources */,
+				9040F5E22DF10ADD006E5718 /* marcel_proust.png in Resources */,
+				9040F5E32DF10ADD006E5718 /* eugenio_montale.png in Resources */,
+				9040F5E42DF10ADD006E5718 /* william_shakespeare.png in Resources */,
+				9040F5E52DF10ADD006E5718 /* roberto_benigni.png in Resources */,
+				9040F5E62DF10ADD006E5718 /* richard_yates.png in Resources */,
+				9040F5E72DF10ADD006E5718 /* confucio.png in Resources */,
+				9040F5E82DF10ADD006E5718 /* carl_jung.png in Resources */,
+				9040F5E92DF10ADD006E5718 /* alexander_bell.png in Resources */,
+				9040F5EA2DF10ADD006E5718 /* ghiannis_ritsos.png in Resources */,
+				9040F5EB2DF10ADD006E5718 /* saramago.png in Resources */,
+				9040F5EC2DF10ADD006E5718 /* theodore_roosevelt.png in Resources */,
+				9040F5ED2DF10ADD006E5718 /* franz_kafka.png in Resources */,
+				9040F5EE2DF10ADD006E5718 /* anthony_robbins.png in Resources */,
+				9040F5EF2DF10ADD006E5718 /* henri_matisse.png in Resources */,
+				9040F5F02DF10ADD006E5718 /* mark_twain.png in Resources */,
+				9040F5F12DF10ADD006E5718 /* leonard_cohen.png in Resources */,
+				9040F5F22DF10ADD006E5718 /* goethe.png in Resources */,
+				9040F5F32DF10ADD006E5718 /* alessandro_manzoni.png in Resources */,
+				9040F5F42DF10ADD006E5718 /* marco_aurelio.png in Resources */,
+				9040F5F52DF10ADD006E5718 /* ugo_foscolo.png in Resources */,
+				9040F5F62DF10ADD006E5718 /* catullo.png in Resources */,
+				9040F5F72DF10ADD006E5718 /* john_keats.png in Resources */,
+				9040F5F82DF10ADD006E5718 /* dostoevskij.png in Resources */,
+				9040F5F92DF10ADD006E5718 /* ernest_hemingway.png in Resources */,
+				9040F5FA2DF10ADD006E5718 /* giacomo_leopardi.png in Resources */,
+				9040F5FB2DF10ADD006E5718 /* charles_bukowski.png in Resources */,
+				9040F5FC2DF10ADD006E5718 /* pasolini.png in Resources */,
+				9040F5FD2DF10ADD006E5718 /* oscar_wilde.png in Resources */,
+				9040F5FE2DF10ADD006E5718 /* albert_einstein.png in Resources */,
+				9040F5FF2DF10ADD006E5718 /* blaga_dimitrova.png in Resources */,
+				9040F6002DF10ADD006E5718 /* saint_exupery.png in Resources */,
+				9040F6012DF10ADD006E5718 /* giovanni_pascoli.png in Resources */,
+				9040F6022DF10ADD006E5718 /* rousseau.png in Resources */,
+				9040F6032DF10ADD006E5718 /* alda_merini.png in Resources */,
+				9040F6042DF10ADD006E5718 /* friedrich_nietzsche.png in Resources */,
+				9040F6052DF10ADD006E5718 /* socrate.png in Resources */,
+				9040F6062DF10ADD006E5718 /* francesco_piscitelli.png in Resources */,
+				9040F6072DF10ADD006E5718 /* jimi_hendrix.png in Resources */,
+				9040F6082DF10ADD006E5718 /* salvatore_quasimodo.png in Resources */,
+				9040F6092DF10ADD006E5718 /* cesare_pavese.png in Resources */,
+				9040F60A2DF10ADD006E5718 /* italo_svevo.png in Resources */,
+				9040F60B2DF10ADD006E5718 /* brandon_sanderson.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
