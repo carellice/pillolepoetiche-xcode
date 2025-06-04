@@ -78,7 +78,7 @@ struct AuthorImageManager {
         
         // Autori sudamericani
         "Jorge Luis Borges": "borges",
-        "José Saramango": "saramango",
+        "José Saramago": "saramago",
         
         // Autori dell'Est Europa
         "Blaga Dimitrova": "blaga_dimitrova",
