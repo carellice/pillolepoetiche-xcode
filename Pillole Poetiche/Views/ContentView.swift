@@ -39,7 +39,15 @@ struct ContentView: View {
                                 .foregroundStyle(.secondary)
                         }
                         .padding()
-                        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 8))
+                        .background(
+                            RoundedRectangle(cornerRadius: 8)
+                                .fill(.regularMaterial)
+                                .shadow(color: .black.opacity(0.08), radius: 2, x: 0, y: 1)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 8)
+                                        .stroke(.quaternary, lineWidth: 0.5)
+                                )
+                        )
                         .padding(.horizontal, 16)
                     }
                     
@@ -93,7 +101,7 @@ struct ContentView: View {
                             systemImage: "person.2"
                         )
                         
-                        // Barra di ricerca iOS nativa
+                        // Barra di ricerca iOS nativa con miglior contrasto
                         VStack {
                             HStack {
                                 Image(systemName: "magnifyingglass")
@@ -111,7 +119,15 @@ struct ContentView: View {
                             }
                             .padding(.horizontal, 12)
                             .padding(.vertical, 8)
-                            .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 10))
+                            .background(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .fill(.regularMaterial)
+                                    .shadow(color: .black.opacity(0.08), radius: 2, x: 0, y: 1)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 10)
+                                            .stroke(.quaternary, lineWidth: 0.5)
+                                    )
+                            )
                             .padding(.horizontal, 16)
                         }
                         
@@ -136,7 +152,15 @@ struct ContentView: View {
                                     }
                                 }
                             }
-                            .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 16))
+                            .background(
+                                RoundedRectangle(cornerRadius: 16)
+                                    .fill(.regularMaterial)
+                                    .shadow(color: .black.opacity(0.08), radius: 4, x: 0, y: 2)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 16)
+                                            .stroke(.quaternary, lineWidth: 0.5)
+                                    )
+                            )
                             .padding(.horizontal, 16)
                         }
                     }

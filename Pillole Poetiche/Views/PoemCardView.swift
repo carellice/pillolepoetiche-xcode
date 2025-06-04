@@ -109,7 +109,15 @@ struct PoemCardView: View {
         .padding(20)
         .frame(height: isHorizontalScroll ? fixedCardHeight : nil) // CORREZIONE: Altezza fissa solo per il carousel
         .frame(maxWidth: .infinity, alignment: .topLeading) // Allineamento in alto a sinistra
-        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 16))
+        .background(
+            RoundedRectangle(cornerRadius: 16)
+                .fill(.regularMaterial)
+                .shadow(color: .black.opacity(0.1), radius: 6, x: 0, y: 3)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 16)
+                        .stroke(.quaternary, lineWidth: 0.5)
+                )
+        )
         .padding(.horizontal, horizontalPadding)
         .contentShape(Rectangle())
         .onTapGesture {
