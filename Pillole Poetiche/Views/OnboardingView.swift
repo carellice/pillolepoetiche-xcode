@@ -30,11 +30,11 @@ struct OnboardingView: View {
             description: "Esplora le opere di grandi pensatori e poeti"
         ),
         OnboardingPage(
-            icon: "doc.on.doc.fill",
-            title: "Condividi\nl'Ispirazione",
-            subtitle: "Copia e condividi le tue poesie preferite",
-            color: .green,
-            description: "Porta la bellezza della poesia nella tua vita quotidiana"
+            icon: "heart.text.square.fill",
+            title: "Dedicato con Amore\na Chiara C.",
+            subtitle: "Questa app nasce dal cuore per chi crede nella bellezza delle parole",
+            color: .pink,
+            description: "\"Per chi crede che le parole possano cambiare il mondo, una poesia alla volta.\""
         )
     ]
     
