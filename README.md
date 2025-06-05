@@ -15,10 +15,9 @@ Pillole Poetiche è un'applicazione iOS nativa sviluppata in SwiftUI che ti acco
 ## 📸 Screenshot
 
 <p align="center">
-  <img src="screenshots/home.png" alt="Home Screen" width="230">
-  <img src="screenshots/carousel.png" alt="Carousel Poesie" width="230">
-  <img src="screenshots/authors.png" alt="Lista Autori" width="230">
-  <img src="screenshots/onboarding.png" alt="Onboarding" width="230">
+  <img src="https://github.com/carellice/pillolepoetiche-xcode/blob/main/screenshots/App%20Store/iPhone/English%20%5Ben%5D%20%7C%20iPhone%20-%206.9%22%20Display%20-%201%20%7C%202025-06-05_10-25-47.jpeg?raw=true" alt="Home Screen" width="230">
+  <img src="https://github.com/carellice/pillolepoetiche-xcode/blob/main/screenshots/App%20Store/iPhone/English%20%5Ben%5D%20%7C%20iPhone%20-%206.9%22%20Display%20-%202%20%7C%202025-06-05_10-25-47.jpeg?raw=true" alt="Lista Autori" width="230">
+  <img src="https://github.com/carellice/pillolepoetiche-xcode/blob/main/screenshots/App%20Store/iPhone/English%20%5Ben%5D%20%7C%20iPhone%20-%206.9%22%20Display%20-%203%20%7C%202025-06-05_10-25-47.jpeg?raw=true" alt="Carousel Poesie" width="230">
 </p>
 
 ---
