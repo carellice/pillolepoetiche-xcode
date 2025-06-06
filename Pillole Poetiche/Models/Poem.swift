@@ -16,7 +16,8 @@ struct Poem: Identifiable, Codable {
     
     // Computed property per condivisione con il tuo sito
     var shareText: String {
-        let link = "https://www.flavioceccarelli.org";
+        //let link = "https://www.flavioceccarelli.org";
+        let link = "https://apps.apple.com/it/app/pillole-poetiche/id6746839400";
         if title.isEmpty {
             return "\"\(poem)\"\n— \(author)\n\n\(link)"
         } else {
