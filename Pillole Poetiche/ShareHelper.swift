@@ -1,7 +1,7 @@
 import SwiftUI
 import UIKit
 
-// MARK: - Vista di anteprima per l'immagine generata
+// MARK: - Vista di anteprima per l'immagine generata (FIX: Spazio bianco rimosso)
 struct ImagePreviewView: View {
     let image: UIImage
     let poem: Poem
@@ -12,84 +12,89 @@ struct ImagePreviewView: View {
     
     var body: some View {
         NavigationStack {
-            ScrollView {
-                VStack(spacing: 20) {
-                    // Anteprima dell'immagine
-                    Image(uiImage: image)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(maxWidth: .infinity)
-                        .background(Color.black.opacity(0.1))
-                        .clipShape(RoundedRectangle(cornerRadius: 12))
-                        .shadow(color: .black.opacity(0.2), radius: 8, x: 0, y: 4)
-                    
-                    // Info sulla poesia
-                    VStack(spacing: 8) {
-                        if !poem.title.isEmpty {
-                            Text(poem.title)
-                                .font(.headline)
-                                .fontWeight(.semibold)
-                                .multilineTextAlignment(.center)
-                        }
+            VStack(spacing: 0) {
+                // FIX: Area scrollabile con calcolo preciso dell'altezza
+                ScrollView {
+                    VStack(spacing: responsiveSpacing) {
+                        // Anteprima dell'immagine
+                        Image(uiImage: image)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(maxWidth: maxImageWidth)
+                            .background(Color.black.opacity(0.1))
+                            .clipShape(RoundedRectangle(cornerRadius: responsiveCornerRadius))
+                            .shadow(color: .black.opacity(0.2), radius: responsiveShadowRadius, x: 0, y: responsiveShadowY)
                         
-                        Text("di \(poem.author)")
-                            .font(.subheadline)
-                            .foregroundStyle(.secondary)
-                            .italic()
-                    }
-                    .padding(.horizontal)
-                    
-                    // Pulsanti di azione
-                    VStack(spacing: 12) {
-                        // Pulsante Condividi
-                        Button(action: {
-                            showingShareSheet = true
-                        }) {
-                            HStack(spacing: 12) {
-                                Image(systemName: "square.and.arrow.up")
-                                    .font(.title3)
-                                
-                                Text("Condividi Immagine")
-                                    .font(.headline)
+                        // Info sulla poesia
+                        VStack(spacing: responsiveInfoSpacing) {
+                            if !poem.title.isEmpty {
+                                Text(poem.title)
+                                    .font(responsiveTitleFont)
                                     .fontWeight(.semibold)
+                                    .multilineTextAlignment(.center)
                             }
-                            .foregroundStyle(.white)
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical, 16)
-                            .background(.blue.gradient, in: RoundedRectangle(cornerRadius: 12))
-                            .shadow(color: .blue.opacity(0.3), radius: 4, y: 2)
+                            
+                            Text("di \(poem.author)")
+                                .font(responsiveAuthorFont)
+                                .foregroundStyle(.secondary)
+                                .italic()
                         }
-                        .buttonStyle(.plain)
-                        
-                        // Pulsante Salva
-                        Button(action: {
-                            saveImageToPhotos()
-                        }) {
-                            HStack(spacing: 12) {
-                                Image(systemName: "square.and.arrow.down")
-                                    .font(.title3)
-                                
-                                Text("Salva nelle Foto")
-                                    .font(.headline)
-                                    .fontWeight(.semibold)
-                            }
-                            .foregroundStyle(.primary)
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical, 16)
-                            .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 12))
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 12)
-                                    .stroke(.quaternary, lineWidth: 1)
-                            )
-                        }
-                        .buttonStyle(.plain)
+                        .padding(.horizontal, responsiveHorizontalPadding)
                     }
-                    .padding(.horizontal, 20)
-                    .padding(.top, 8)
-                    
-                    Spacer(minLength: 40)
+                    .padding(.top, responsiveContentPadding)
+                    .padding(.horizontal, responsiveContentPadding)
+                    .padding(.bottom, 16) // FIX: Padding bottom fisso e piccolo
                 }
-                .padding(20)
+                
+                // FIX: Pulsanti in area fissa senza spazio extra
+                VStack(spacing: responsiveButtonSpacing) {
+                    // Pulsante Condividi
+                    Button(action: {
+                        showingShareSheet = true
+                    }) {
+                        HStack(spacing: responsiveButtonIconSpacing) {
+                            Image(systemName: "square.and.arrow.up")
+                                .font(responsiveButtonIconFont)
+                            
+                            Text("Condividi Immagine")
+                                .font(responsiveButtonFont)
+                                .fontWeight(.semibold)
+                        }
+                        .foregroundStyle(.white)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, responsiveButtonPadding)
+                        .background(.blue.gradient, in: RoundedRectangle(cornerRadius: responsiveButtonCornerRadius))
+                        .shadow(color: .blue.opacity(0.3), radius: responsiveButtonShadow, y: 2)
+                    }
+                    .buttonStyle(.plain)
+                    
+                    // Pulsante Salva
+                    Button(action: {
+                        saveImageToPhotos()
+                    }) {
+                        HStack(spacing: responsiveButtonIconSpacing) {
+                            Image(systemName: "square.and.arrow.down")
+                                .font(responsiveButtonIconFont)
+                            
+                            Text("Salva nelle Foto")
+                                .font(responsiveButtonFont)
+                                .fontWeight(.semibold)
+                        }
+                        .foregroundStyle(.primary)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, responsiveButtonPadding)
+                        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: responsiveButtonCornerRadius))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: responsiveButtonCornerRadius)
+                                .stroke(.quaternary, lineWidth: 1)
+                        )
+                    }
+                    .buttonStyle(.plain)
+                }
+                .padding(.horizontal, responsiveHorizontalPadding)
+                .padding(.top, responsiveButtonAreaTopPadding) // FIX: Solo padding top
+                .padding(.bottom, responsiveButtonAreaBottomPadding) // FIX: Padding bottom minimo
+                .background(.regularMaterial)
             }
             .background(
                 LinearGradient(
@@ -102,7 +107,7 @@ struct ImagePreviewView: View {
                 )
             )
             .navigationTitle("Anteprima Condivisione")
-            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarTitleDisplayMode(UIDevice.current.userInterfaceIdiom == .pad ? .large : .inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button("Annulla") {
@@ -119,6 +124,94 @@ struct ImagePreviewView: View {
             } message: {
                 Text(saveAlertMessage)
             }
+        }
+    }
+    
+    // MARK: - Responsive Design Properties per iPad (FIX: Spacing ottimizzati)
+    
+    private var responsiveSpacing: CGFloat {
+        UIDevice.current.userInterfaceIdiom == .pad ? 32 : 20
+    }
+    
+    private var responsiveInfoSpacing: CGFloat {
+        UIDevice.current.userInterfaceIdiom == .pad ? 12 : 8
+    }
+    
+    private var responsiveContentPadding: CGFloat {
+        UIDevice.current.userInterfaceIdiom == .pad ? 32 : 20
+    }
+    
+    private var responsiveHorizontalPadding: CGFloat {
+        UIDevice.current.userInterfaceIdiom == .pad ? 40 : 20
+    }
+    
+    // FIX: Padding area pulsanti ottimizzati
+    private var responsiveButtonAreaTopPadding: CGFloat {
+        UIDevice.current.userInterfaceIdiom == .pad ? 20 : 16
+    }
+    
+    private var responsiveButtonAreaBottomPadding: CGFloat {
+        // FIX: Padding bottom minimo per evitare spazio bianco
+        UIDevice.current.userInterfaceIdiom == .pad ? 24 : 20
+    }
+    
+    private var responsiveButtonSpacing: CGFloat {
+        UIDevice.current.userInterfaceIdiom == .pad ? 16 : 12
+    }
+    
+    private var responsiveButtonIconSpacing: CGFloat {
+        UIDevice.current.userInterfaceIdiom == .pad ? 16 : 12
+    }
+    
+    private var responsiveButtonPadding: CGFloat {
+        UIDevice.current.userInterfaceIdiom == .pad ? 20 : 16
+    }
+    
+    private var responsiveCornerRadius: CGFloat {
+        UIDevice.current.userInterfaceIdiom == .pad ? 16 : 12
+    }
+    
+    private var responsiveButtonCornerRadius: CGFloat {
+        UIDevice.current.userInterfaceIdiom == .pad ? 16 : 12
+    }
+    
+    private var responsiveShadowRadius: CGFloat {
+        UIDevice.current.userInterfaceIdiom == .pad ? 12 : 8
+    }
+    
+    private var responsiveShadowY: CGFloat {
+        UIDevice.current.userInterfaceIdiom == .pad ? 6 : 4
+    }
+    
+    private var responsiveButtonShadow: CGFloat {
+        UIDevice.current.userInterfaceIdiom == .pad ? 6 : 4
+    }
+    
+    // MARK: - Responsive Fonts
+    
+    private var responsiveTitleFont: Font {
+        UIDevice.current.userInterfaceIdiom == .pad ? .title : .headline
+    }
+    
+    private var responsiveAuthorFont: Font {
+        UIDevice.current.userInterfaceIdiom == .pad ? .title3 : .subheadline
+    }
+    
+    private var responsiveButtonFont: Font {
+        UIDevice.current.userInterfaceIdiom == .pad ? .title3 : .headline
+    }
+    
+    private var responsiveButtonIconFont: Font {
+        UIDevice.current.userInterfaceIdiom == .pad ? .title2 : .title3
+    }
+    
+    // MARK: - Layout Calculations (FIX: Calcoli semplificati)
+    
+    private var maxImageWidth: CGFloat {
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            return 600 // FIX: Larghezza fissa per iPad
+        } else {
+            return UIScreen.main.bounds.width * 0.9 // FIX: Percentuale per iPhone
         }
     }
     
@@ -210,6 +303,14 @@ class ShareHelper {
                     let previewView = ImagePreviewView(image: image, poem: poem)
                     let hostingController = UIHostingController(rootView: previewView)
                     
+                    // FIX: Modalità presentazione ottimizzata per iPad
+                    if UIDevice.current.userInterfaceIdiom == .pad {
+                        hostingController.modalPresentationStyle = .formSheet
+                        hostingController.preferredContentSize = CGSize(width: 700, height: 850) // FIX: Altezza leggermente aumentata
+                    } else {
+                        hostingController.modalPresentationStyle = .automatic
+                    }
+                    
                     // Feedback aptico
                     let impact = UIImpactFeedbackGenerator(style: .medium)
                     impact.impactOccurred()
@@ -270,4 +371,28 @@ class ShareHelper {
     static func sharePoem(_ poem: Poem, completion: @escaping (Bool) -> Void) {
         showPreviewAndShare(poem, completion: completion)
     }
+}
+
+#Preview("Anteprima iPad - Fix Spacing") {
+    ImagePreviewView(
+        image: UIImage(systemName: "photo")!,
+        poem: Poem(
+            title: "Test Preview iPad Senza Spazio Bianco",
+            poem: "Questa è una poesia di test per vedere l'anteprima ottimizzata per iPad senza spazio bianco sotto i pulsanti.",
+            author: "Test Autore"
+        )
+    )
+    .previewDevice("iPad Pro (12.9-inch) (6th generation)")
+}
+
+#Preview("Anteprima iPhone - Fix Spacing") {
+    ImagePreviewView(
+        image: UIImage(systemName: "photo")!,
+        poem: Poem(
+            title: "Test Preview iPhone",
+            poem: "Test per iPhone senza spazio extra.",
+            author: "Test Autore"
+        )
+    )
+    .previewDevice("iPhone 15 Pro")
 }

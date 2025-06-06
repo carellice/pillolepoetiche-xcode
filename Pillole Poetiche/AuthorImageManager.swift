@@ -135,7 +135,7 @@ struct AuthorImageManager {
     }
 }
 
-// Vista componente per l'avatar dell'autore - Versione semplificata
+// MARK: - AuthorAvatarView ottimizzata per iPad
 struct AuthorAvatarView: View {
     let author: String
     let size: CGFloat
@@ -146,9 +146,8 @@ struct AuthorAvatarView: View {
     }
     
     var body: some View {
-        // Versione semplificata per debug
         ZStack {
-            // Background sempre visibile per debug
+            // Background sempre visibile
             Circle()
                 .fill(.blue.gradient)
                 .frame(width: size, height: size)
@@ -165,11 +164,110 @@ struct AuthorAvatarView: View {
             } else {
                 // Mostra sempre le iniziali
                 Text(AuthorImageManager.getAuthorInitials(author))
-                    .font(.system(size: size * 0.35, weight: .semibold))
+                    .font(.system(size: responsiveFontSize, weight: .semibold))
                     .foregroundStyle(.white)
             }
         }
         .frame(width: size, height: size)
-        .shadow(color: .black.opacity(0.1), radius: 2, x: 0, y: 1)
+        .shadow(color: .black.opacity(0.1), radius: responsiveShadowRadius, x: 0, y: responsiveShadowY)
     }
+    
+    // MARK: - Responsive sizing per iPad
+    private var responsiveFontSize: CGFloat {
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            return size * 0.38 // Leggermente più grande su iPad
+        } else {
+            return size * 0.35
+        }
+    }
+    
+    private var responsiveShadowRadius: CGFloat {
+        UIDevice.current.userInterfaceIdiom == .pad ? 3 : 2
+    }
+    
+    private var responsiveShadowY: CGFloat {
+        UIDevice.current.userInterfaceIdiom == .pad ? 2 : 1
+    }
+}
+
+#Preview("Avatar Sizes - iPad") {
+    VStack(spacing: 20) {
+        Text("Avatar iPad - Diverse Dimensioni")
+            .font(.title2)
+            .fontWeight(.bold)
+        
+        HStack(spacing: 20) {
+            VStack {
+                AuthorAvatarView(author: "Albert Einstein", size: 40)
+                Text("40pt")
+                    .font(.caption)
+            }
+            
+            VStack {
+                AuthorAvatarView(author: "Charles Bukowski", size: 60)
+                Text("60pt")
+                    .font(.caption)
+            }
+            
+            VStack {
+                AuthorAvatarView(author: "Giacomo Leopardi", size: 80)
+                Text("80pt")
+                    .font(.caption)
+            }
+            
+            VStack {
+                AuthorAvatarView(author: "Anonimo", size: 100)
+                Text("100pt (Iniziali)")
+                    .font(.caption)
+            }
+        }
+        
+        Text("Gli avatar su iPad hanno font e ombre leggermente più grandi")
+            .font(.caption)
+            .foregroundStyle(.secondary)
+            .multilineTextAlignment(.center)
+            .padding(.horizontal)
+    }
+    .padding()
+    .previewDevice("iPad Pro (12.9-inch) (6th generation)")
+}
+
+#Preview("Avatar Sizes - iPhone") {
+    VStack(spacing: 20) {
+        Text("Avatar iPhone - Diverse Dimensioni")
+            .font(.title3)
+            .fontWeight(.bold)
+        
+        HStack(spacing: 15) {
+            VStack {
+                AuthorAvatarView(author: "Albert Einstein", size: 30)
+                Text("30pt")
+                    .font(.caption2)
+            }
+            
+            VStack {
+                AuthorAvatarView(author: "Charles Bukowski", size: 40)
+                Text("40pt")
+                    .font(.caption2)
+            }
+            
+            VStack {
+                AuthorAvatarView(author: "Giacomo Leopardi", size: 50)
+                Text("50pt")
+                    .font(.caption2)
+            }
+            
+            VStack {
+                AuthorAvatarView(author: "Anonimo", size: 60)
+                Text("60pt")
+                    .font(.caption2)
+            }
+        }
+        
+        Text("Dimensioni standard iPhone")
+            .font(.caption2)
+            .foregroundStyle(.secondary)
+    }
+    .padding()
+    .previewDevice("iPhone 15 Pro")
 }
