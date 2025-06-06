@@ -4,8 +4,9 @@ struct PoemCardView: View {
     let poem: Poem
     let horizontalPadding: CGFloat
     let isHorizontalScroll: Bool
-    @State private var showCopyConfirmation = false
+    @State private var showShareConfirmation = false
     @State private var showFullPoem = false
+    @State private var isGeneratingImage = false
     
     // CORREZIONE: Altezza fissa per le card del carousel
     private let fixedCardHeight: CGFloat = 280
@@ -44,12 +45,11 @@ struct PoemCardView: View {
                     .fontWeight(.semibold)
                     .foregroundStyle(.primary)
                     .multilineTextAlignment(.leading)
-                    .lineLimit(isHorizontalScroll ? 2 : nil) // Limita il titolo nel carousel
+                    .lineLimit(isHorizontalScroll ? 2 : nil)
             }
             
-            // CORREZIONE: Testo della poesia con troncamento fisso per il carousel
+            // Testo della poesia
             if isHorizontalScroll {
-                // Nel carousel, tronchiamo a 162 caratteri senza ScrollView
                 Text(truncatedText)
                     .font(.body)
                     .foregroundStyle(.secondary)
@@ -57,7 +57,6 @@ struct PoemCardView: View {
                     .lineSpacing(6)
                     .fixedSize(horizontal: false, vertical: true)
             } else {
-                // Card normale senza limitazioni
                 Text(poem.poem)
                     .font(.body)
                     .foregroundStyle(.secondary)
@@ -66,7 +65,6 @@ struct PoemCardView: View {
                     .fixedSize(horizontal: false, vertical: true)
             }
             
-            // CORREZIONE: Spacer per spingere l'autore e i pulsanti in basso nelle card del carousel
             if isHorizontalScroll {
                 Spacer()
             }
@@ -78,7 +76,7 @@ struct PoemCardView: View {
                     .foregroundStyle(.tertiary)
                     .fontWeight(.medium)
                     .italic()
-                    .lineLimit(1) // Evita che l'autore vada su più righe
+                    .lineLimit(1)
                 
                 Spacer()
                 
@@ -94,21 +92,23 @@ struct PoemCardView: View {
                         .buttonStyle(.borderless)
                     }
                     
-                    // Pulsante copia
-                    Button(action: copyPoem) {
-                        Label("Copia", systemImage: showCopyConfirmation ? "checkmark.circle.fill" : "doc.on.doc")
+                    // Pulsante condividi immagine
+                    Button(action: sharePoem) {
+                        Label("Condividi", systemImage: getShareIcon())
                             .labelStyle(.iconOnly)
-                            .foregroundStyle(showCopyConfirmation ? .green : .blue)
+                            .foregroundStyle(getShareColor())
                             .font(.title2)
-                            .symbolEffect(.bounce, value: showCopyConfirmation)
+                            .symbolEffect(.bounce, value: showShareConfirmation)
+                            .opacity(isGeneratingImage ? 0.6 : 1.0)
                     }
                     .buttonStyle(.borderless)
+                    .disabled(isGeneratingImage)
                 }
             }
         }
         .padding(20)
-        .frame(height: isHorizontalScroll ? fixedCardHeight : nil) // CORREZIONE: Altezza fissa solo per il carousel
-        .frame(maxWidth: .infinity, alignment: .topLeading) // Allineamento in alto a sinistra
+        .frame(height: isHorizontalScroll ? fixedCardHeight : nil)
+        .frame(maxWidth: .infinity, alignment: .topLeading)
         .background(
             RoundedRectangle(cornerRadius: 16)
                 .fill(.regularMaterial)
@@ -131,22 +131,42 @@ struct PoemCardView: View {
         }
     }
     
-    private func copyPoem() {
-        UIPasteboard.general.string = poem.shareText
-        
-        // Feedback visivo
-        withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
-            showCopyConfirmation = true
+    private func getShareIcon() -> String {
+        if showShareConfirmation {
+            return "checkmark.circle.fill"
+        } else if isGeneratingImage {
+            return "hourglass.circle"
+        } else {
+            return "square.and.arrow.up"
         }
+    }
+    
+    private func getShareColor() -> Color {
+        if showShareConfirmation {
+            return .green
+        } else {
+            return .blue
+        }
+    }
+    
+    private func sharePoem() {
+        isGeneratingImage = true
         
-        // Feedback aptico
-        let impact = UIImpactFeedbackGenerator(style: .medium)
-        impact.impactOccurred()
-        
-        // Reset del checkmark dopo 2 secondi
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            withAnimation(.easeOut(duration: 0.3)) {
-                showCopyConfirmation = false
+        ShareHelper.sharePoem(poem) { success in
+            isGeneratingImage = false
+            
+            if success {
+                // Feedback di successo
+                withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+                    showShareConfirmation = true
+                }
+                
+                // Reset del checkmark dopo 2 secondi
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    withAnimation(.easeOut(duration: 0.3)) {
+                        showShareConfirmation = false
+                    }
+                }
             }
         }
     }
@@ -155,13 +175,14 @@ struct PoemCardView: View {
 struct FullPoemView: View {
     let poem: Poem
     @Environment(\.dismiss) private var dismiss
-    @State private var showCopyConfirmation = false
+    @State private var showShareConfirmation = false
+    @State private var isGeneratingImage = false
     
     var body: some View {
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 24) {
-                    // Titolo (se presente)
+                    // Titolo della poesia (se presente)
                     if !poem.title.isEmpty {
                         Text(poem.title)
                             .font(.title2)
@@ -185,21 +206,28 @@ struct FullPoemView: View {
                         .fontWeight(.medium)
                         .italic()
                     
-                    // Pulsante copia centrato
+                    // Pulsante condividi immagine centrato
                     HStack {
                         Spacer()
-                        Button(action: copyPoem) {
-                            Label(
-                                showCopyConfirmation ? "Copiato!" : "Copia poesia",
-                                systemImage: showCopyConfirmation ? "checkmark.circle.fill" : "doc.on.doc"
-                            )
+                        Button(action: sharePoem) {
+                            HStack(spacing: 8) {
+                                if isGeneratingImage {
+                                    ProgressView()
+                                        .scaleEffect(0.8)
+                                } else {
+                                    Image(systemName: showShareConfirmation ? "checkmark.circle.fill" : "square.and.arrow.up")
+                                }
+                                
+                                Text(isGeneratingImage ? "Generando..." : (showShareConfirmation ? "Condiviso!" : "Condividi Immagine"))
+                            }
                             .foregroundStyle(.white)
                             .font(.subheadline)
                             .fontWeight(.medium)
                         }
                         .buttonStyle(.borderedProminent)
-                        .tint(showCopyConfirmation ? .green : .blue)
+                        .tint(showShareConfirmation ? .green : .blue)
                         .controlSize(.large)
+                        .disabled(isGeneratingImage)
                         Spacer()
                     }
                     .padding(.top, 8)
@@ -230,33 +258,35 @@ struct FullPoemView: View {
         }
     }
     
-    private func copyPoem() {
-        UIPasteboard.general.string = poem.shareText
+    private func sharePoem() {
+        isGeneratingImage = true
         
-        // Feedback visivo
-        withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
-            showCopyConfirmation = true
-        }
-        
-        // Feedback aptico
-        let impact = UIImpactFeedbackGenerator(style: .medium)
-        impact.impactOccurred()
-        
-        // Reset del checkmark dopo 2 secondi
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            withAnimation(.easeOut(duration: 0.3)) {
-                showCopyConfirmation = false
+        ShareHelper.sharePoem(poem) { success in
+            isGeneratingImage = false
+            
+            if success {
+                // Feedback di successo
+                withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+                    showShareConfirmation = true
+                }
+                
+                // Reset del checkmark dopo 2 secondi
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    withAnimation(.easeOut(duration: 0.3)) {
+                        showShareConfirmation = false
+                    }
+                }
             }
         }
     }
 }
 
-#Preview("Card Normale") {
+#Preview("Card con Condivisione Semplificata") {
     VStack {
         PoemCardView(
             poem: Poem(
                 title: "Test Poesia",
-                poem: "Questa è una poesia di test per vedere come viene visualizzata nella card normale senza limitazioni di altezza.",
+                poem: "Questa è una poesia di test per vedere la nuova funzione di condivisione semplificata che genera solo un'immagine pulita.",
                 author: "Autore Test"
             ),
             horizontalPadding: 16,
@@ -265,70 +295,4 @@ struct FullPoemView: View {
     }
     .padding()
     .background(Color(UIColor.systemBackground))
-}
-
-#Preview("Card Carousel - Troncamento Intelligente") {
-    ScrollView(.horizontal, showsIndicators: false) {
-        LazyHStack(spacing: 16) {
-            // Poesia CON titolo - limite 162 caratteri
-            PoemCardView(
-                poem: Poem(
-                    title: "Con Titolo",
-                    poem: "Questa poesia ha un titolo, quindi viene troncata a 162 caratteri. Questo testo è abbastanza lungo da superare il limite di 162 caratteri e dovrebbe essere troncato con tre puntini per mostrare che c'è altro contenuto da leggere nella vista completa.",
-                    author: "Autore Test"
-                ),
-                horizontalPadding: 0,
-                isHorizontalScroll: true
-            )
-            .frame(width: 300)
-            
-            // Poesia SENZA titolo - limite 210 caratteri
-            PoemCardView(
-                poem: Poem(
-                    title: "",
-                    poem: "Questa poesia non ha titolo, quindi viene troncata a 210 caratteri. Avendo più spazio disponibile (senza il titolo), può contenere molto più testo prima di essere troncata. Questo permette di sfruttare meglio lo spazio della card quando non c'è un titolo da mostrare. Il limite è molto più alto per ottimizzare l'esperienza di lettura e permettere di vedere più contenuto direttamente nella card del carousel.",
-                    author: "Autore Senza Titolo"
-                ),
-                horizontalPadding: 0,
-                isHorizontalScroll: true
-            )
-            .frame(width: 300)
-            
-            // Poesia breve CON titolo (non troncata)
-            PoemCardView(
-                poem: Poem(
-                    title: "Breve",
-                    poem: "Testo breve che non viene troncato.",
-                    author: "Autore"
-                ),
-                horizontalPadding: 0,
-                isHorizontalScroll: true
-            )
-            .frame(width: 300)
-            
-            // Poesia breve SENZA titolo (non troncata)
-            PoemCardView(
-                poem: Poem(
-                    title: "",
-                    poem: "Testo breve senza titolo che non viene troncato perché è sotto il limite di 210 caratteri per le poesie senza titolo.",
-                    author: "Autore"
-                ),
-                horizontalPadding: 0,
-                isHorizontalScroll: true
-            )
-            .frame(width: 300)
-        }
-        .padding(.horizontal, 16)
-    }
-    .background(Color(UIColor.systemBackground))
-}
-
-#Preview("Sheet Poesia Completa") {
-    FullPoemView(
-        poem: Poem(
-            title: "Poesia Completa",
-            poem: "Questa è la vista completa della poesia che si apre quando si tocca una card o si preme il pulsante espandi. Il testo è mostrato per intero con una formattazione ottimizzata per la lettura. Il pulsante di copia è centrato e ben visibile.",
-            author: "Autore Esempio"
-        )
-    )
 }

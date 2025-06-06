@@ -5,15 +5,9 @@ struct FullScreenPoemView: View {
     @Environment(\.dismiss) var dismiss
     @Environment(\.colorScheme) var colorScheme
     @State private var showingShareSheet = false
-    
-    // Formato personalizzato per la condivisione
-    private var shareText: String {
-        if poem.title.isEmpty {
-            return "\"\(poem.poem)\"\n— \(poem.author)\n\nhttps://www.flavioceccarelli.org"
-        } else {
-            return "\"\(poem.title)\"\n\(poem.poem)\n— \(poem.author)\n\nhttps://www.flavioceccarelli.org"
-        }
-    }
+    @State private var isGeneratingImage = false
+    @State private var showShareConfirmation = false
+    @State private var generatedImage: UIImage?
     
     var body: some View {
         ZStack {
@@ -83,15 +77,21 @@ struct FullScreenPoemView: View {
                             .fontWeight(.medium)
                             .shadow(radius: 1)
                         
-                        // Pulsante Condividi
+                        // NUOVO: Pulsante Condividi Immagine
                         Button {
-                            showingShareSheet = true
+                            sharePoem()
                         } label: {
                             HStack(spacing: 12) {
-                                Image(systemName: "square.and.arrow.up")
-                                    .font(.title3)
+                                if isGeneratingImage {
+                                    ProgressView()
+                                        .scaleEffect(0.8)
+                                        .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                                } else {
+                                    Image(systemName: showShareConfirmation ? "checkmark.circle.fill" : "square.and.arrow.up")
+                                        .font(.title3)
+                                }
                                 
-                                Text("Condividi Poesia")
+                                Text(isGeneratingImage ? "Generando Immagine..." : (showShareConfirmation ? "Condiviso!" : "Condividi Immagine"))
                                     .font(.headline)
                                     .fontWeight(.semibold)
                             }
@@ -107,6 +107,8 @@ struct FullScreenPoemView: View {
                         .buttonStyle(.plain)
                         .shadow(radius: 4)
                         .padding(.top, 16)
+                        .disabled(isGeneratingImage)
+                        .opacity(isGeneratingImage ? 0.7 : 1.0)
                     }
                     .padding(.horizontal, 24)
                     
@@ -117,8 +119,6 @@ struct FullScreenPoemView: View {
             // Controlli in alto
             VStack {
                 HStack {
-                    // ❌ RIMOSSO: Pulsante condividi in alto a sinistra
-                    
                     Spacer()
                     
                     // Pulsante chiusura in alto a destra
@@ -138,8 +138,28 @@ struct FullScreenPoemView: View {
             }
         }
         .preferredColorScheme(.dark)
-        .sheet(isPresented: $showingShareSheet) {
-            ShareSheet(items: [shareText]) // Usa il formato personalizzato
+    }
+    
+    // NUOVO: Funzione per condividere l'immagine
+    private func sharePoem() {
+        isGeneratingImage = true
+        
+        ShareHelper.sharePoem(poem) { success in
+            isGeneratingImage = false
+            
+            if success {
+                // Feedback di successo
+                withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+                    showShareConfirmation = true
+                }
+                
+                // Reset del checkmark dopo 2 secondi
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    withAnimation(.easeOut(duration: 0.3)) {
+                        showShareConfirmation = false
+                    }
+                }
+            }
         }
     }
     
@@ -162,19 +182,6 @@ struct FullScreenPoemView: View {
     }
 }
 
-// MARK: - Share Sheet
-struct ShareSheet: UIViewControllerRepresentable {
-    let items: [Any]
-    
-    func makeUIViewController(context: Context) -> UIActivityViewController {
-        let controller = UIActivityViewController(activityItems: items, applicationActivities: nil)
-        return controller
-    }
-    
-    func updateUIViewController(_ uiViewController: UIActivityViewController, context: Context) {}
-}
-
-// MARK: - Preview
 #Preview {
     FullScreenPoemView(poem: Poem.placeholder)
 }
