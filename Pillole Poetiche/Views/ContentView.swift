@@ -107,8 +107,7 @@ struct ContentView: View {
                                 Image(systemName: "magnifyingglass")
                                     .foregroundStyle(.secondary)
                                 
-                                TextField("Cerca autore...", text: $searchText)
-                                    .textFieldStyle(.plain)
+                                NoAutocorrectTextField(text: $searchText, placeholder: "Cerca autore...")
                                 
                                 if !searchText.isEmpty {
                                     Button(action: { searchText = "" }) {
