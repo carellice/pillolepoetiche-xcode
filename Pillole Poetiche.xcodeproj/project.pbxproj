@@ -497,11 +497,11 @@
 				};
 			};
 			buildConfigurationList = 90D063462DF0C3EA00728991 /* Build configuration list for PBXProject "Pillole Poetiche" */;
-			developmentRegion = en;
+			developmentRegion = it;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
 				Base,
+				it,
 			);
 			mainGroup = 90D063422DF0C3EA00728991;
 			minimizedProjectReferenceProxies = 1;
